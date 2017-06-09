@@ -1,5 +1,5 @@
 const SERVO = P13;
-const POT = A0;
+const POT = A2;
 
 const servo = require('@amperka/servo').connect(SERVO);
 const pot = require('@amperka/pot').connect(POT);
