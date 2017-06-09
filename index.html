@@ -1,49 +1,195 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+	<title>Програмування мікроконтроллерів на JavaScript</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/js.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+<body>
+<div class="reveal">
+	<div class="slides">
+		<section>
+			<h1>Програмування мікроконтроллерів на JavaScript</h1>
+		</section>
+
+		<section>
+			<h2>Про мене</h2>
+			<ul>
+				<li>Випускник ЧНУ</li>
+				<li>Full stack розробник в ASD</li>
+				<li>Ментор NodeSchool Чернівці</li>
+			</ul>
+		</section>
+
+		<section>
+			<section>
+				<h2>Espruino</h2>
+				<p>Екосистема програмування мікроконтролерів на мові JavaScript</p>
+				<ul>
+					<li>плати Espruino і сумісні пристрої</li>
+					<li>прошивка з інтерпретатором JavaScript</li>
+					<li>Espruino WEB IDE</li>
+				</ul>
+				<p>
+					<a href="http://www.espruino.com/">http://www.espruino.com/</a>
+				</p>
+			</section>
+
+			<section>
+				<h2>ECMAScript 5</h2>
+				<ul>
+					<li>Відсутні мітки для break</li>
+					<li>Відсутні регулярні вирази і деякі функції</li>
+					<li>";" не додаються автоматично в кінці рядків</li>
+					<li>API для роботи з портами</li>
+				</ul>
+			</section>
+
+			<section>
+				<div class="columns">
+					<div class="column">
+						<h3>Espruino</h3>
+						<pre><code data-trim data-noescape>
+							setInterval(function() {
+								a != a;
+								digitalWrite(LED1, a);
+							}, 1000);
+						</code></pre>
+					</div>
+					<div class="column">
+						<h3>Arduino</h3>
+						<pre><code data-trim data-noescape>
+							void setup() {
+								pinMode(LED1, OUTPUT);
+							}
+							void loop() {
+								digitalWrite(LED1, HIGH);
+								delay(1000);
+								digitalWrite(LED1, LOW);
+								delay(1000);
+							}
+						</code></pre>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class="columns">
+					<div class="column">
+						<h3>Espruino</h3>
+						<pre><code data-trim data-noescape>
+							setInterval(function() {
+								a != a;
+								digitalWrite(LED1, a);
+							}, 1000);
+							setInterval(function() {
+								b != b;
+								digitalWrite(LED2, b);
+							}, 1024);
+						</code></pre>
+					</div>
+					<div class="column">
+						<h3>Arduino</h3>
+						<pre><code data-trim data-noescape>
+							int count1 = 0;
+							int count2 = 0;
+							void setup() {
+								pinMode(LED1, OUTPUT);
+								pinMode(LED2, OUTPUT);
+							}
+							void loop() {
+								digitalWrite(LED1,
+									count1 < 1000);
+								if(++count1 >= 2000)
+									count1 = 0;
+								digitalWrite(LED2,
+									count2 < 1234);
+								if(++count2 >= 2468)
+									count2 = 0;
+								delay(1);
+							}
+						</code></pre>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<section>
+			<h2>IskraJS</h2>
+			<div class="columns">
+				<div class="column" style="width: 40%">
+					<img src="/iskra-js.jpg" alt="">
+				</div>
+				<div class="column" style="text-align: left; width: 60%; padding-left: 20px; padding-top: 30px;">
+					<ul>
+						<li>Мікроконтроллер: STM32F405RG<br>(32-бітний ARM Cortex M4)</li>
+						<li>Тактова частота: 168 МГц</li>
+						<li>Об'єм флеш-пам'яті: 1024 КБ</li>
+						<li>Об'єм SRAM: 192 КБ</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+		<section>
+			<h2>Набір додаткового API</h2>
+			<div class="columns">
+				<div class="column">
+					<ul>
+						<li>setWatch</li>
+						<li>pinMode</li>
+						<li>digital[Read/Pulse/Write]</li>
+						<li>analog[Read/Write]</li>
+					</ul>
+				</div>
+				<div class="column">
+					<ul>
+						<li>SPI</li>
+						<li>File API</li>
+						<li>I2C</li>
+						<li>Serial</li>
+						<li>OneWire</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+	// More info about config & dependencies:
+	// - https://github.com/hakimel/reveal.js#configuration
+	// - https://github.com/hakimel/reveal.js#dependencies
+	Reveal.initialize({
+		dependencies: [
+			{src: 'plugin/markdown/marked.js'},
+			{src: 'plugin/markdown/markdown.js'},
+			{src: 'plugin/notes/notes.js', async: true},
+			{
+				src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+				hljs.initHighlightingOnLoad();
+			}
+			}
+		]
+	});
+</script>
+</body>
 </html>
