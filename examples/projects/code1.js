@@ -1,7 +1,7 @@
 const LED = P3;
 const BTN = P2;
 
-let state = true;
+let state = false;
 setWatch((data) => {
   if(!data.state) return;
   state = !state;
